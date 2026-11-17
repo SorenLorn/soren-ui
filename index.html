@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script id="soren-theme-boot">
+      (() => {
+        var theme = 'dark';
+        try {
+          if (localStorage.getItem('soren-ui-theme') === 'light') theme = 'light';
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.background = theme === 'light' ? '#ffffff' : '#0f0f0f';
+      })();
+    </script>
+
+    <meta name="theme-color" content="#0F0F0F" />
+    <meta name="description" content="Soren UI — my personal React component library." />
+
+    <link
+      rel="preload"
+      href="/node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Soren UI" />
+
+    <title>Soren UI</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

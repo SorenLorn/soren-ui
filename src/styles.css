@@ -1,0 +1,9 @@
+@import 'tailwindcss' source(none);
+@import './css/fonts.css';
+@import './css/variables.css';
+@import './css/background.css';
+@import './css/soren.css';
+
+/* Tailwind v4 只扫描我自己的代码，避免历史目录拖慢构建 */
+@source './site/**/*.{jsx,tsx,js}';
+@source './library/**/*.{jsx,tsx,js}';

@@ -1,0 +1,130 @@
+.sbtn {
+  --sbtn-accent: #7c5cff;
+  --sbtn-accent-hover: #8d70ff;
+  --sbtn-radius: 10px;
+  --sbtn-ring: rgba(124, 92, 255, 0.45);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--sbtn-radius);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
+  color: #ededed;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
+    transform 0.1s ease, filter 0.15s ease;
+}
+
+.sbtn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.sbtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--sbtn-ring);
+}
+
+.sbtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sbtn--primary {
+  color: #fff;
+  background: var(--sbtn-accent);
+  box-shadow: 0 6px 16px -8px rgba(124, 92, 255, 0.9);
+}
+
+.sbtn--primary:hover:not(:disabled) {
+  background: var(--sbtn-accent-hover);
+  filter: brightness(1.04);
+}
+
+.sbtn--secondary {
+  color: #ededed;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.sbtn--secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.sbtn--ghost {
+  color: #9e9e9e;
+}
+
+.sbtn--ghost:hover:not(:disabled) {
+  color: #ededed;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sbtn--outline {
+  color: #b9a6ff;
+  border-color: rgba(124, 92, 255, 0.45);
+  background: rgba(124, 92, 255, 0.06);
+}
+
+.sbtn--outline:hover:not(:disabled) {
+  color: #d3c6ff;
+  border-color: rgba(124, 92, 255, 0.7);
+  background: rgba(124, 92, 255, 0.14);
+}
+
+.sbtn--sm {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12.5px;
+  --sbtn-radius: 8px;
+}
+
+.sbtn--lg {
+  height: 44px;
+  padding: 0 20px;
+  font-size: 14.5px;
+  --sbtn-radius: 12px;
+}
+
+.sbtn--block {
+  width: 100%;
+}
+
+.sbtn__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.sbtn__spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: sbtn-spin 0.7s linear infinite;
+}
+
+@keyframes sbtn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sbtn__spinner {
+    animation-duration: 1.6s;
+  }
+
+  .sbtn:active:not(:disabled) {
+    transform: none;
+  }
+}

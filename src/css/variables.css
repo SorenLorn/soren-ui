@@ -1,0 +1,259 @@
+/**
+ * Soren UI 设计令牌
+ * 视觉基准参考 Uiverse 组件库：中性深色底 + 卡片明度分层 + 紫靛强调色
+ *   页面 #0f0f0f · 卡片 #1a1a1a · 描边 rgba(255,255,255,.08) · 强调 #7c5cff
+ */
+:root {
+  /* ---------- 背景与表面 ---------- */
+  --bg-body: #0f0f0f;
+  --bg-card: #1a1a1a;
+  --bg-elevated: #1f1f1f;
+  --bg-hover: #242424;
+
+  /* ---------- 描边 ---------- */
+  --border-primary: rgba(255, 255, 255, 0.12);
+  --border-secondary: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* ---------- 品牌色 ---------- */
+  --color-primary: #7c5cff;
+  --color-primary-hover: #8d70ff;
+  --color-primary-soft: rgba(124, 92, 255, 0.16);
+  --color-accent: #a08cff;
+  --color-accent-muted: #8f7fe0;
+
+  /* ---------- 文字 ---------- */
+  --text-primary: #ededed;
+  --text-secondary: #c9c9c9;
+  --text-muted: #9e9e9e;
+  --text-dimmed: #8a8a8a;
+  --text-link: #ededed;
+  --section-heading: #ededed;
+
+  /* ---------- 圆角 ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 999px;
+
+  /* ---------- 阴影 ---------- */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-dropdown: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-primary: 0 6px 16px -8px rgba(124, 92, 255, 0.9);
+  --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-elevated-hover: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-menu: 0 12px 32px rgba(0, 0, 0, 0.55);
+
+  /* ---------- 按钮（统一规格） ---------- */
+  --btn-height-sm: 30px;
+  --btn-height-md: 36px;
+  --btn-height-lg: 44px;
+  --btn-padding-sm: 12px;
+  --btn-padding-md: 16px;
+  --btn-padding-lg: 20px;
+  --btn-radius-sm: 8px;
+  --btn-radius-md: 10px;
+  --btn-radius-lg: 12px;
+  --btn-font-sm: 12.5px;
+  --btn-font-md: 13.5px;
+  --btn-font-lg: 14.5px;
+  --btn-weight: 600;
+  --btn-focus-ring: 0 0 0 3px rgba(124, 92, 255, 0.45);
+
+  /* ---------- 间距节奏（4 的倍数） ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ---------- 布局 ---------- */
+  --page-max: 1280px;
+  --grid-gap: 20px;
+  --grid-gap-lg: 24px;
+  --card-padding: 16px;
+  --docs-header-height: 60px;
+  --docs-content-max-width: 720px;
+
+  /* ---------- 动效 ---------- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 100ms;
+  --dur-tooltip: 160ms;
+  --dur-menu: 200ms;
+  --dur-panel: 280ms;
+  --transition-fast: 0.15s var(--ease-out);
+  --transition-base: 0.2s var(--ease-out);
+  --transition-slow: 0.3s var(--ease-out);
+
+  /* ---------- 渐变标题 ---------- */
+  --gradient-title: linear-gradient(135deg, #ffffff 0%, #c9c9c9 38%, #a08cff 72%, #7c5cff 100%);
+
+  /* ---------- 表面与控件 ---------- */
+  --surface-ghost: rgba(255, 255, 255, 0.06);
+  --surface-ghost-hover: rgba(255, 255, 255, 0.1);
+  --surface-ghost-highlight: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  --surface-ghost-blur: blur(24px) saturate(1.2);
+  --surface-ghost-track: rgba(255, 255, 255, 0.05);
+  --action-control-bg: rgba(255, 255, 255, 0.05);
+  --action-control-border: transparent;
+  --action-control-hover: rgba(255, 255, 255, 0.1);
+  --action-control-selected: rgba(255, 255, 255, 0.12);
+  --action-control-selected-border: transparent;
+  --action-control-shadow: none;
+
+  --shell-panel: rgba(15, 15, 15, 0.82);
+  --shell-panel-solid: #0f0f0f;
+  --shell-border: rgba(255, 255, 255, 0.08);
+  --shell-border-strong: rgba(255, 255, 255, 0.16);
+  --shell-fade-rgb: 15, 15, 15;
+  --field-bg: #141414;
+  --text-on-accent: #ffffff;
+  --inset-border: rgba(255, 255, 255, 0.06);
+  --preview-border: rgba(255, 255, 255, 0.06);
+  --inset-divider: rgba(255, 255, 255, 0.05);
+  --row-hover: rgba(255, 255, 255, 0.04);
+  --code-name: #b9a6ff;
+  --code-type: rgba(201, 201, 201, 0.7);
+  --code-value: #d6d6d6;
+  --code-chip: rgba(255, 255, 255, 0.06);
+  --skeleton-base: #1a1a1a;
+  --skeleton-shine: #262626;
+  --slider-thumb: rgba(255, 255, 255, 0.9);
+  --slider-fill: rgba(255, 255, 255, 0.06);
+  --switch-track: #2e2e2e;
+  --switch-track-checked: #d4d4d8;
+  --switch-knob: #a1a1aa;
+  --switch-knob-checked: #27272a;
+  --floating-control-bg: rgba(15, 15, 15, 0.72);
+  --floating-control-hover: rgba(36, 36, 36, 0.94);
+  --code-bg: #141414;
+  --code-bg-accent: #1a1a1a;
+  --new-badge-text: #d3c6ff;
+  --new-badge-bg: rgba(124, 92, 255, 0.24);
+  --tool-track: rgba(255, 255, 255, 0.05);
+  --tool-track-hover: rgba(255, 255, 255, 0.09);
+  --tool-hover: rgba(255, 255, 255, 0.06);
+  --tool-raised: rgba(255, 255, 255, 0.1);
+  --tool-raised-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --tool-muted: rgba(237, 237, 237, 0.6);
+  --tool-float: rgba(38, 38, 38, 0.62);
+  --tool-float-hover: rgba(52, 52, 52, 0.78);
+  --tool-float-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --tool-tooltip: #1f1f1f;
+  --tool-tooltip-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --menu-bg: #1f1f1f;
+  --menu-bg-rgb: 31, 31, 31;
+  --menu-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 18px 44px -12px rgba(0, 0, 0, 0.7), 0 6px 14px -6px rgba(0, 0, 0, 0.45);
+  --menu-highlight: rgba(255, 255, 255, 0.06);
+  --menu-label: rgba(237, 237, 237, 0.42);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg-body: #ffffff;
+  --bg-card: #ffffff;
+  --bg-elevated: #f7f7f8;
+  --bg-hover: #efeff1;
+
+  --border-primary: rgba(0, 0, 0, 0.14);
+  --border-secondary: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+
+  --color-primary: #6d4aff;
+  --color-primary-hover: #5b36f5;
+  --color-primary-soft: rgba(109, 74, 255, 0.1);
+  --color-accent: #6d4aff;
+  --color-accent-muted: #7d68c9;
+
+  --text-primary: #171717;
+  --text-secondary: #333333;
+  --text-muted: #6b6b6b;
+  --text-dimmed: #8a8a8a;
+  --text-link: #171717;
+  --section-heading: #333333;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-dropdown: 0 16px 42px rgba(17, 17, 17, 0.12);
+  --shadow-primary: 0 6px 16px -8px rgba(109, 74, 255, 0.55);
+  --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-elevated-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-menu: 0 16px 36px rgba(17, 17, 17, 0.14);
+  --btn-focus-ring: 0 0 0 3px rgba(109, 74, 255, 0.25);
+
+  --surface-ghost: rgba(0, 0, 0, 0.05);
+  --surface-ghost-hover: rgba(0, 0, 0, 0.08);
+  --surface-ghost-highlight: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --surface-ghost-track: rgba(0, 0, 0, 0.04);
+  --action-control-bg: rgba(0, 0, 0, 0.04);
+  --action-control-hover: rgba(0, 0, 0, 0.08);
+  --action-control-selected: #ffffff;
+
+  --shell-panel: rgba(255, 255, 255, 0.86);
+  --shell-panel-solid: #ffffff;
+  --shell-border: rgba(0, 0, 0, 0.08);
+  --shell-border-strong: rgba(0, 0, 0, 0.16);
+  --shell-fade-rgb: 255, 255, 255;
+  --field-bg: #ffffff;
+  --inset-border: rgba(0, 0, 0, 0.08);
+  --preview-border: rgba(0, 0, 0, 0.06);
+  --inset-divider: rgba(0, 0, 0, 0.07);
+  --row-hover: rgba(0, 0, 0, 0.03);
+  --code-name: #6d4aff;
+  --code-type: #555555;
+  --code-value: #333333;
+  --code-chip: rgba(0, 0, 0, 0.06);
+  --skeleton-base: #ededee;
+  --skeleton-shine: #f8f8f9;
+  --switch-track: #d4d4d8;
+  --switch-track-checked: #52525b;
+  --switch-knob: #ffffff;
+  --switch-knob-checked: #ffffff;
+  --floating-control-bg: rgba(255, 255, 255, 0.92);
+  --floating-control-hover: #ffffff;
+  --code-bg: #ffffff;
+  --code-bg-accent: #f7f7f8;
+  --new-badge-text: #5b36f5;
+  --new-badge-bg: rgba(109, 74, 255, 0.12);
+  --tool-track: rgba(0, 0, 0, 0.04);
+  --tool-track-hover: rgba(0, 0, 0, 0.07);
+  --tool-hover: rgba(0, 0, 0, 0.04);
+  --tool-raised: #ffffff;
+  --tool-raised-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --tool-muted: rgba(23, 23, 23, 0.6);
+  --tool-float: rgba(255, 255, 255, 0.86);
+  --tool-float-hover: #ffffff;
+  --tool-float-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --tool-tooltip: #ffffff;
+  --tool-tooltip-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.07);
+  --menu-bg: #ffffff;
+  --menu-bg-rgb: 255, 255, 255;
+  --menu-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 18px 44px -14px rgba(17, 17, 17, 0.2), 0 6px 14px -8px rgba(17, 17, 17, 0.1);
+  --menu-highlight: rgba(0, 0, 0, 0.05);
+  --menu-label: rgba(23, 23, 23, 0.46);
+  --gradient-title: linear-gradient(135deg, #171717 0%, #4a4a4a 38%, #6d4aff 100%);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* Shared keyframes — used by section titles across multiple components */
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}

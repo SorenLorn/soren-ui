@@ -1,0 +1,143 @@
+/* ==========================================================================
+   站点背景：Micro Slats（微条块 · 透视浪涌）
+   --------------------------------------------------------------------------
+   视觉：由细小竖条块排成的“墙”，在透视下向地平线收束；整体做正弦浪涌，
+        波峰处出现掠射高光（glinting crests），远处被雾化淡出。
+   实现：1 个 Canvas 2D 层（绘制条块）+ 2 个 CSS 层（环境光晕、压暗蒙版）。
+        所有可调参数都在 .slats-bg 的 CSS 变量上，改样式即可换效果。
+   性能：仅透明 Canvas 绘制，无 shader、无滤镜（默认）；按视口自适应密度；
+        页面隐藏或用户偏好减少动效时停止动画。
+   ========================================================================== */
+
+.slats-bg {
+  /* ---------- 层结构 ---------- */
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: var(--bg-body);
+
+  /* ================= 可自定义参数（改这里） ================= */
+
+  /* 颜色 */
+  --slats-color: #8f74ff; /* 条块本体颜色 */
+  --slats-glint-color: #cbb8ff; /* 波峰高光颜色 */
+  --slats-glow: rgba(124, 92, 255, 0.16); /* 顶部环境光 */
+  --slats-veil: rgba(15, 15, 15, 0.66); /* 边缘压暗，保证正文可读 */
+
+  /* 透明度与氛围 */
+  --slats-opacity: 0.34; /* 条块整体不透明度 0–1 */
+  --slats-fog: 0.95; /* 远处雾化强度 0–1，越大越“深” */
+
+  /* 密度（纯数字，无单位；Canvas 直接读取） */
+  --slats-columns: 120; /* 每行条块数 */
+  --slats-rows: 26; /* 纵深行数 */
+  --slats-slat-width: 6; /* 最近一行条块宽度 px */
+  --slats-slat-height: 30; /* 最近一行条块高度 px */
+
+  /* 透视 */
+  --slats-horizon: 0.36; /* 地平线位置（0=顶部，1=底部） */
+  --slats-depth-power: 2; /* 纵深压缩指数，越大远处越密集 */
+
+  /* 波形与速度 */
+  --slats-wave-count: 6; /* 横向波的数量 */
+  --slats-wave-height: 24; /* 波幅 px（最近一行） */
+  --slats-speed: 0.6; /* 动画速度倍率，0 = 静止 */
+
+  /* 高光 */
+  --slats-glint-threshold: 0.7; /* 波浪值超过该阈值才出现高光（-1–1） */
+  --slats-glint-intensity: 0.7; /* 高光强度 0–1 */
+
+  /* 指针交互（移动悬停 / 点击） */
+  --slats-pointer-radius: 210; /* 光标影响半径 px */
+  --slats-pointer-strength: 0.85; /* 光标下压 + 提亮 + 光晕强度 0–1（0 = 关闭悬停交互） */
+  --slats-ripple-strength: 1; /* 点击涟漪强度 0–1（0 = 关闭点击涟漪） */
+  --slats-ripple-speed: 260; /* 涟漪扩散速度 px/s */
+  --slats-ripple-life: 1.4; /* 涟漪生命周期 秒 */
+
+  /* 波形质感（对应原版 chop：叠加二次谐波，使浪峰更尖） */
+  --slats-chop: 0.35; /* 0 = 纯正弦；1 = 明显碎浪 */
+
+  /* 烟雾 / 墨雾：缓慢漂移的柔光团，靠近光标会被轻微吸拢，点击会绽开一团 */
+  --slats-smoke-count: 4; /* 烟团数量（0 = 关闭） */
+  --slats-smoke-color: #8f74ff; /* 烟团颜色 */
+  --slats-smoke-opacity: 0.055; /* 整体浓度 0–1 */
+  --slats-smoke-size: 540; /* 单团直径 px */
+  --slats-smoke-speed: 10; /* 漂移速度（0 = 静止） */
+
+  /* 可选滤镜：开启会增加合成开销，默认关闭 */
+  --slats-filter: none;
+}
+
+.slats-bg__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 顶部环境光：给画面一个光源方向 */
+.slats-bg__glow {
+  position: absolute;
+  inset: -12% -10% auto -10%;
+  height: 72%;
+  background: radial-gradient(62% 62% at 50% 0%, var(--slats-glow), transparent 72%);
+}
+
+/* 边缘压暗：让正文与卡片在背景上仍然清晰 */
+.slats-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 92% at 50% 0%, transparent 34%, var(--slats-veil) 100%),
+    linear-gradient(to bottom, var(--bg-body) 0%, transparent 24%, transparent 74%, var(--bg-body) 100%),
+    linear-gradient(to right, var(--bg-body) 0%, transparent 15%, transparent 85%, var(--bg-body) 100%);
+}
+
+/* 内容层：所有页面内容抬到背景之上 */
+.app-layer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 浅色主题 ---------- */
+:root[data-theme='light'] .slats-bg {
+  --slats-color: #6d4aff;
+  --slats-glint-color: #4c2ce0;
+  --slats-opacity: 0.2;
+  --slats-glow: rgba(109, 74, 255, 0.12);
+  --slats-veil: rgba(255, 255, 255, 0.72);
+  --slats-smoke-color: #6d4aff;
+  --slats-smoke-opacity: 0.07;
+}
+
+:root[data-theme='light'] .slats-bg__vignette {
+  background:
+    radial-gradient(120% 92% at 50% 0%, transparent 34%, var(--slats-veil) 100%),
+    linear-gradient(to bottom, var(--bg-body) 0%, transparent 24%, transparent 74%, var(--bg-body) 100%),
+    linear-gradient(to right, var(--bg-body) 0%, transparent 15%, transparent 85%, var(--bg-body) 100%);
+}
+
+/* ---------- 小屏降密度（画布内部也会再降档） ---------- */
+@media (max-width: 720px) {
+  .slats-bg {
+    --slats-columns: 56;
+    --slats-rows: 22;
+    --slats-slat-width: 5;
+    --slats-slat-height: 16;
+    --slats-wave-height: 14;
+    /* 小屏减少烟团数量与尺寸，控制填充率 */
+    --slats-smoke-count: 3;
+    --slats-smoke-size: 420;
+  }
+}
+
+/* ---------- 用户偏好减少动效：静态一帧（Canvas 侧同样停止 rAF） ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .slats-bg {
+    --slats-speed: 0;
+  }
+}

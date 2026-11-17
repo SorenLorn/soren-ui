@@ -1,0 +1,8 @@
+{
+  "name": "soren-ui",
+  "compatibility_date": "2025-06-15",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "single-page-application"
+  }
+}
