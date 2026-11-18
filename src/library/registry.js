@@ -13,7 +13,7 @@ import { buildUsage, extractSnippet } from './usage';
  *
  * 约定：`_` 或 `.` 开头的目录/文件不注册（内部部件放这里）。
  */
-const SOURCES = import.meta.glob('./*/*/*.{jsx,tsx,css}', { query: '?raw', import: 'default', eager: true });
+const SOURCES = import.meta.glob('./*/*/*.{jsx,tsx,ts,css}', { query: '?raw', import: 'default', eager: true });
 const DEMOS = import.meta.glob('./*/*/demo.{jsx,tsx}');
 const PREVIEWS = import.meta.glob('./*/*/preview.{jsx,tsx}');
 const METAS = import.meta.glob('./*/*/meta.js', { eager: true });
@@ -37,7 +37,12 @@ const stripExt = file => file.replace(/\.(jsx|tsx)$/, '');
 
 const toLabel = file => toTitleCase(stripExt(file));
 
-const langOf = name => (name.endsWith('.css') ? 'css' : name.endsWith('.tsx') ? 'tsx' : 'jsx');
+const langOf = name => {
+  if (name.endsWith('.css')) return 'css';
+  if (name.endsWith('.tsx')) return 'tsx';
+  if (name.endsWith('.ts')) return 'ts';
+  return 'jsx';
+};
 
 const extRank = name => (name.endsWith('.css') ? 1 : 0);
 
@@ -83,6 +88,7 @@ function buildComponentMap() {
     entry.since = meta.since || null;
     entry.props = Array.isArray(meta.props) ? meta.props : [];
     entry.related = Array.isArray(meta.related) ? meta.related : [];
+    entry.notes = Array.isArray(meta.notes) ? meta.notes.filter(note => note && note.title && note.text) : [];
     entry.load = pickModule(DEMOS, `./${entry.categorySlug}/${entry.slug}/demo`);
     entry.preview = pickModule(PREVIEWS, `./${entry.categorySlug}/${entry.slug}/preview`);
     entry.examples = [];

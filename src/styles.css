@@ -4,6 +4,9 @@
 @import './css/background.css';
 @import './css/soren.css';
 
+/* 站点主题走 data-theme，Tailwind 的 dark: 变体需要与之对齐（默认是 prefers-color-scheme） */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 /* Tailwind v4 只扫描我自己的代码，避免历史目录拖慢构建 */
 @source './site/**/*.{jsx,tsx,js}';
 @source './library/**/*.{jsx,tsx,js}';

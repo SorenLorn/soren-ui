@@ -9,7 +9,9 @@
 export const POPULARITY = {
   'buttons/button': { usage: 2480 },
   'segmented-controls/segmented-control': { usage: 1320 },
+  'cards/holo-card': { usage: 1180 },
   'inputs/text-input': { usage: 960 },
   'cards/metric-card': { usage: 880 },
+  'segmented-controls/category': { usage: 820 },
   'cards/card': { usage: 740 }
 };

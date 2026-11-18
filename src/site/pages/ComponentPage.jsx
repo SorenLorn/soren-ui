@@ -18,6 +18,15 @@ const TOC_BASE = [
   { id: 'source', label: '源码' }
 ];
 
+/** meta.notes 存在时在示例与 API 之间插入「交互说明」 */
+const buildTocItems = (component, relatedCount) => {
+  const items = [TOC_BASE[0]];
+  if (component?.notes?.length) items.push({ id: 'behavior', label: '交互说明' });
+  items.push(TOC_BASE[1], TOC_BASE[2]);
+  if (relatedCount > 0) items.push({ id: 'related', label: '相关组件' });
+  return items;
+};
+
 const RelatedCard = ({ item }) => {
   const Preview = useMemo(() => (item.preview || item.load ? lazy(item.preview || item.load) : null), [item]);
   if (!Preview) return null;
@@ -57,10 +66,7 @@ export default function ComponentPage() {
       .filter(Boolean);
   }, [component]);
 
-  const tocItems = useMemo(
-    () => (related.length > 0 ? [...TOC_BASE, { id: 'related', label: '相关组件' }] : TOC_BASE),
-    [related.length]
-  );
+  const tocItems = useMemo(() => buildTocItems(component, related.length), [component, related.length]);
 
   // 切换组件时重置源码区，并支持 #code=<file> / ?example=<slug> 深链
   useEffect(() => {
@@ -167,6 +173,22 @@ export default function ComponentPage() {
           </h2>
           <DemoSection examples={component.examples} fallback={fallbackDemo} onShowSource={showSource} />
         </section>
+
+        {component.notes?.length > 0 && (
+          <section className="doc-section" id="behavior" aria-labelledby="doc-behavior">
+            <h2 className="doc-section-title" id="doc-behavior">
+              交互说明
+            </h2>
+            <ul className="doc-notes">
+              {component.notes.map(note => (
+                <li className="doc-note" key={note.title}>
+                  <span className="doc-note-title">{note.title}</span>
+                  <span className="doc-note-text">{note.text}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className="doc-section" id="api" aria-labelledby="doc-api">
           <h2 className="doc-section-title" id="doc-api">
