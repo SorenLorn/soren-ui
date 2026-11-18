@@ -77,6 +77,7 @@ src/
 | --- | --- | --- |
 | `<Name>.jsx` / `<Name>.tsx` | 是 | 组件源码，源码区第一个 Tab。 |
 | `<Name>.css` | 否 | 样式文件，在源码区作为额外 Tab 出现。 |
+| `<Name>.ts` | 否 | 组件依赖的纯 TypeScript 模块（如图片管线），在源码区作为独立 Tab 出现。 |
 | `examples/*.jsx` | 否 | 可运行示例，文件名即示例标题，需要默认导出。 |
 | `preview.jsx` | 否 | 首页展示区缩略图，只渲染组件本身。 |
 | `meta.js` | 否 | 显示名称、描述、状态、`since`、`props`、`related`，缺省则用文件夹名推导。 |
@@ -94,6 +95,8 @@ export default {
   status: 'stable',          // 'stable' | 'beta' | 'deprecated'
   since: '2026-11',
   related: ['inputs/text-input'],
+  // 可选：在组件页渲染为「交互说明」区块
+  notes: [{ title: '功能名', text: '呈现形式、触发条件与联动关系。' }],
   props: [
     {
       name: 'variant',
@@ -211,10 +214,12 @@ npx wrangler deploy
 | 分类 | 组件 | 说明 |
 | --- | --- | --- |
 | Segmented Controls | `Segmented Control` | 带滑动高亮块的分段切换控件，支持受控 / 非受控、三种尺寸与占满宽度 |
+| Segmented Controls | `Category` | iOS 风格毛玻璃分段控件，等分滑块、方向键切换、深浅色自适应 |
 | Buttons | `Button` | 四种变体、三种尺寸，支持图标、加载中与禁用状态 |
 | Buttons | `Icon Button` | 纯图标按钮，强制 label 保证无障碍名称，支持三种变体 |
 | Cards | `Card` | 内容卡片容器，支持媒体区、标题、描述、页脚与可选 hover 抬升效果 |
 | Cards | `Metric Card` | 指标卡片：主数值 + 单位 + 环比涨跌徽标，TSX + Tailwind 实现 |
+| Cards | `Holo Card` | WebGL 全息镭射卡：12 种闪光花纹、指针倾斜、双面翻转与静态降级，另带换图 / 调光交互台 |
 | Inputs | `Text Input` | 带标签、提示与错误状态的单行输入框，支持前后缀图标与三种尺寸 |
 
 ## 参与贡献

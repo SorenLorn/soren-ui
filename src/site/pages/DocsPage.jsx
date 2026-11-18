@@ -19,8 +19,9 @@ export default function DocsPage() {
             <pre className="sd-code">{`src/library/
   <category>/                # 分类，如 buttons
     <component>/             # 组件，如 button
-      Button.jsx             # 组件源码（源码区主文件）
+      Button.jsx             # 组件源码（源码区主文件，也支持 .tsx）
       Button.css             # 可选，样式一并进入源码区
+      helpers.ts             # 可选，组件依赖的纯 TS 模块（同样进入源码区）
       examples/
         basic.jsx            # 一个文件 = 一个示例 = 一段可复制源码
       preview.jsx            # 可选，首页缩略展示（只渲染组件本体）

@@ -80,6 +80,7 @@ A component folder may contain any of the following. Only the first item is requ
 | --- | --- | --- |
 | `<Name>.jsx` / `<Name>.tsx` | yes | Component source, shown first in the code viewer. |
 | `<Name>.css` | no | Stylesheet, shown as an extra tab next to the source. |
+| `<Name>.ts` | no | Plain TypeScript helper (e.g. an image pipeline) imported by the component, shown as its own source tab. |
 | `examples/*.jsx` | no | Runnable example. The file name becomes the example title. Default export required. |
 | `preview.jsx` | no | Thumbnail for the homepage showcase; must render the component on its own. |
 | `meta.js` | no | Display name, description, status, `since`, `props`, `related` — falls back to the folder name. |
@@ -98,6 +99,8 @@ export default {
   status: 'stable',          // 'stable' | 'beta' | 'deprecated'
   since: '2026-11',
   related: ['inputs/text-input'],
+  // optional: rendered as an "Interactions" block on the component page
+  notes: [{ title: 'Copy', text: 'What it does, when it triggers, and how it links to other controls.' }],
   props: [
     {
       name: 'variant',
@@ -217,10 +220,12 @@ Because routing is client-side, configure the host to rewrite unknown paths to `
 | Category | Component | Notes |
 | --- | --- | --- |
 | Segmented Controls | `Segmented Control` | Sliding-highlight switcher; controlled or uncontrolled, three sizes, full width |
+| Segmented Controls | `Category` | iOS-style frosted segmented control with equal-width thumb, arrow-key navigation and light/dark adaptation |
 | Buttons | `Button` | Four variants, three sizes, icons, loading and disabled states |
 | Buttons | `Icon Button` | Icon-only button with a required accessible label, three variants |
 | Cards | `Card` | Content container with media, title, description, footer and optional hover lift |
 | Cards | `Metric Card` | Metric value + unit + delta badge, built with TSX and Tailwind |
+| Cards | `Holo Card` | WebGL holographic foil card: 12 presets, pointer tilt, flip support, a static fallback and an in-page playground for swapping images and tuning the foil |
 | Inputs | `Text Input` | Single-line input with label, hint, error state and affix icons |
 
 ## Contributing
