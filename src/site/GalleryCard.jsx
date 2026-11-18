@@ -1,9 +1,10 @@
 import { Suspense, lazy, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 
 /**
- * 参考站风格的展示卡：大尺寸预览面板 + 下方信息行（名称 / 分类）
- * 预览面板固定深色，内部不可交互，整卡作为链接
+ * 展示卡：预览舞台 + 信息行，整卡即链接。
+ * 三态反馈：加载中显示骨架屏 → 内容淡入；hover 上浮并显示「View」提示；active 回弹。
  */
 export default function GalleryCard({ item }) {
   const Preview = useMemo(() => {
@@ -12,13 +13,20 @@ export default function GalleryCard({ item }) {
   }, [item]);
 
   return (
-    <Link className="gallery-card" to={item.path} aria-label={item.name}>
+    <Link className="gallery-card" to={item.path} aria-label={`${item.name} — ${item.categoryName}`}>
       <div className="gallery-frame" inert aria-hidden="true">
-        {Preview && (
-          <Suspense fallback={null}>
-            <Preview />
-          </Suspense>
-        )}
+        <Suspense fallback={<span className="sh-skel sh-skel--thumb" />}>
+          {Preview && (
+            <div className="gallery-stage">
+              <Preview />
+            </div>
+          )}
+        </Suspense>
+
+        <span className="gallery-hint">
+          View
+          <ArrowUpRight size={11} />
+        </span>
       </div>
 
       <div className="gallery-meta">
